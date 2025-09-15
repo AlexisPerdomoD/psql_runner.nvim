@@ -1,6 +1,4 @@
-local P = {}
-
-P.parse_query_from_selection = function()
+local function parse_query_from_selection()
     local start_pos = vim.fn.getpos "'<"
     local end_pos = vim.fn.getpos "'>"
 
@@ -19,4 +17,6 @@ P.parse_query_from_selection = function()
     return query
 end
 
+local P = {}
+P.parse_query_from_selection = parse_query_from_selection
 return P
