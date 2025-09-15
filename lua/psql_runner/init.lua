@@ -11,7 +11,7 @@ local M = {}
 
 --- @class SetupOpts
 --- @field [1] string|nil database url
-
+--- Global config
 --- @type Config
 M.config = {
     db_url = nil,
@@ -19,7 +19,15 @@ M.config = {
 }
 
 function M:is_valid_config()
-    if type(self.config.db_url) ~= 'string' then return false end
+    if self.config.db_url == nil then return false end
+    -- others validations like regexs
+    return true
+end
+
+--- Changes the db connection string to posgresql
+function M:change_db(db)
+    if type(db) ~= 'string' or db == '' then return false end
+    self.config.db_url = db
     return true
 end
 
@@ -56,7 +64,5 @@ M.setup = function(opts)
 end
 
 M.run_sql = function() end
-
-M.change_db = function() end
 
 return M
