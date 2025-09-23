@@ -5,19 +5,13 @@ vim.opt.rtp:append '/home/cuji/repos/sql_runner'
 local P = require 'psql_runner.parser'
 local R = require 'psql_runner.register'
 
+---@class Plugin
+local M = {}
+
 ---@class Config
 ---@field db_url string|nil
 ---@field dir_url string|nil
 ---@field cmd string
-
----@class SetupOpts
----@field db_url string|nil database url
----@field dir_url string|nil dir url
----@field cmd string|nil command to use
-
----@class Plugin
-local M = {}
-
 ---@type Config
 M.config = {
     db_url = nil,
@@ -67,6 +61,10 @@ function M:run_selected_sql()
     return lines
 end
 
+---@class SetupOpts
+---@field db_url string|nil database url
+---@field dir_url string|nil dir url
+---@field cmd string|nil command to use
 --- @param opts SetupOpts
 M.setup = function(opts)
     if type(opts) ~= 'table' then
